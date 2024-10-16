@@ -6,21 +6,27 @@
 #include <WiFi.h>
 #include <WebServer.h>
 
+// Replace with your network credentials
+const char* ssid = "Dineth";        // Your Wi-Fi SSID
+const char* password = "11111111";  // Your Wi-Fi Password
+
 // OLED display configuration
-
-#define SCREEN_WIDTH 128 // OLED display width, in pixels
-#define SCREEN_HEIGHT 64 // OLED display height, in pixels
+#define SCREEN_WIDTH 128  // OLED display width, in pixels
+#define SCREEN_HEIGHT 64  // OLED display height, in pixels
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
-
 Adafruit_MPU6050 mpu;
+
+// Web server on port 80
+WebServer server(80);
 
 int stepCounter = 0;
 float previousZ = 0;
-float stepThreshold = 1.5;      // distance between steps
+float stepThreshold = 2.0;  // Step detection threshold
 float fallThresholdHigh = 3.0;  // Fall detection upper threshold
-float fallThresholdLow = -14.0; // Fall detection lower threshold
+float fallThresholdLow = -30.0; // Fall detection lower threshold
+bool fallDetected;
 
-void setup(void)
+
 {
   Serial.begin(115200); // Ensure this line is correct and complete
 
