@@ -1,12 +1,10 @@
-// libraries
-//libraries for MPU6050 board
+#include <Wire.h>
 #include <Adafruit_MPU6050.h>
 #include <Adafruit_Sensor.h>
-#include <Wire.h>
-
-//libraries for OLED display
 #include <Adafruit_SSD1306.h>
 #include <Adafruit_GFX.h>
+#include <WiFi.h>
+#include <WebServer.h>
 
 // OLED display configuration
 
