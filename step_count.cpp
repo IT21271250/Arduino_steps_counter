@@ -144,6 +144,7 @@ void loop() {
 
   if (ax > fallThresholdHigh || ay > fallThresholdHigh || az > fallThresholdHigh || 
       ax < fallThresholdLow || ay < fallThresholdLow || az < fallThresholdLow) {
+        
     // If no fall, keep monitoring status
     display.setTextSize(1);
     display.setCursor(0, 16);
@@ -152,7 +153,8 @@ void loop() {
     display.display();
   
   } else {
-     // Display fall detected on OLED
+    
+    // Display fall detected on OLED
 
     display.clearDisplay();
     display.setTextSize(2);
@@ -164,7 +166,9 @@ void loop() {
     Serial.println("Fall detected!"); 
   }
 
-  previousZ = az;  // Update Z value for step detection
+  // Update Z value for step detection
+  previousZ = az;  
 
-  delay(300);  // Delay for half a second
+  // Delay for half a second
+  delay(300); 
 }
