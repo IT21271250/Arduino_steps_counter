@@ -26,7 +26,6 @@ float fallThresholdHigh = 3.0;  // Fall detection upper threshold
 float fallThresholdLow = -30.0; // Fall detection lower threshold
 bool fallDetected;
 
-
 // Function to handle root URL
 void handleRoot() {
     String html = "<!DOCTYPE html><html lang='en'>";
