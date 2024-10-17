@@ -7,7 +7,7 @@
 #include <WebServer.h>
 
 // Replace with your network credentials
-const char* ssid = "Dineth";        // Your Wi-Fi SSID
+const char* ssid = "Champika";        // Your Wi-Fi SSID
 const char* password = "11111111";  // Your Wi-Fi Password
 
 // OLED display configuration
@@ -108,13 +108,16 @@ void setup() {
 
   // Define the root URL handler
  server.on("/", handleRoot);
-  server.begin();  // Start the server
-  Serial.println("HTTP server started");// Start the server
+
+ // Start the server
+  server.begin();  
+  Serial.println("HTTP server started");
 }
 
 void loop() {
 
   server.handleClient();
+  
   // Get sensor readings
   sensors_event_t accel, gyro, temp;
   mpu.getEvent(&accel, &gyro, &temp);
@@ -129,6 +132,7 @@ void loop() {
     Serial.print("Step detected! Total steps: ");
     Serial.println(stepCounter);
     stepCounter++;
+
     // Display step count on OLED
     display.clearDisplay();
     display.setTextSize(2);  
@@ -144,7 +148,7 @@ void loop() {
 
   if (ax > fallThresholdHigh || ay > fallThresholdHigh || az > fallThresholdHigh || 
       ax < fallThresholdLow || ay < fallThresholdLow || az < fallThresholdLow) {
-        
+
     // If no fall, keep monitoring status
     display.setTextSize(1);
     display.setCursor(0, 16);
