@@ -2,9 +2,9 @@
 #include <Adafruit_MPU6050.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_SSD1306.h>
-#include <Adafruit_GFX.h>
 #include <WiFi.h>
-#include <WebServer.h>
+#include <MQTTClient.h>
+#include <ArduinoJson.h>
 
 // Replace with your network credentials
 const char* ssid = "Champika";        // Your Wi-Fi SSID
