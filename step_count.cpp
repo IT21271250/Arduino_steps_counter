@@ -119,6 +119,56 @@ void loop() {
 
     // Fall Detection
 
+ if (ax > fallThresholdHigh || ay > fallThresholdHigh || az > fallThresholdHigh || 
+        ax < fallThresholdLow || ay < fallThresholdLow || az < fallThresholdLow) {
+
+          fallDetected = false;
+        display.setTextSize(1);
+        display.setCursor(0, 16);
+        display.println("Monitoring...");
+        display.display();
+       
+    } else {
+         fallDetected = true;
+        display.clearDisplay();
+        display.setTextSize(2);
+        display.setCursor(0, 0);
+        display.println("Fall");
+        display.println("Detected!");
+        display.display();
+        Serial.println("Fall detected!");
+    }
+
+    // Check if the reset flag is set
+    if (resetFlag) {
+        resetStepCounter();
+    }
+
+    delay(300);  // Delay for half a second
+}
+
+// Function to connect to MQTT broker
+void connectToMQTT() {
+    mqtt.begin(MQTT_BROKER_ADDRESS, MQTT_PORT, network);
+    mqtt.onMessage(messageHandler);
+
+    Serial.print("Connecting to MQTT broker...");
+    while (!mqtt.connect(MQTT_CLIENT_ID)) {
+        Serial.print(".");
+        delay(1000);
+    }
+    Serial.println("Connected to MQTT broker!");
+
+    if (mqtt.subscribe(SUBSCRIBE_TOPIC)) {
+        Serial.print("Subscribed to: ");
+        Serial.println(SUBSCRIBE_TOPIC);
+    } else {
+        Serial.print("Failed to subscribe to: ");
+        Serial.println(SUBSCRIBE_TOPIC);
+    }
+}
+
+
 // Replace with your network credentials
 const char* ssid = "Champika";        // Your Wi-Fi SSID
 const char* password = "11111111";  // Your Wi-Fi Password
